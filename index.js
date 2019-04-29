@@ -9,17 +9,21 @@
  * and then appends that string value to a blockchain.
  */
 const sha256 = require('sha256');
+const crypto = require("crypto");
+const randomstring = require("randomstring");
+
+// const alphanumericString = crypto.randomBytes(8).toString('hex');
 
 class Block {
   constructor(index, timestamp, companyName, prevHash) {
-    // blocks index
-    this.index = index;
-    this.timestamp = timestamp;
-    this.companyName = companyName;
-    this.prevHash = prevHash;
+    this.index = index
+    this.timestamp = timestamp
+    this.companyName = companyName
+    this.prevHash = prevHash
+    this.randomString = randomstring.generate(16)
     this.thisHash = sha256(
-      this.index + this.timestamp + this.companyName + this.prevHash
-    );
+      this.index + this.timestamp + this.companyName + this.prevHash, this.randomString
+    )
   }
 }
 
